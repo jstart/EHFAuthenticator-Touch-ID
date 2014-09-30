@@ -13,6 +13,7 @@ Our mockup of the feature in eHarmony is below:
 
     pod 'EHFAuthenticator-Touch-ID'
 
+
     [[EHFAuthenticator sharedInstance] setReason:@"Authenticate with Touch ID to access secure data"]
     [[EHFAuthenticator sharedInstance] authenticateWithSuccess:^(){
         [self presentAlertControllerWithMessage:@"Successfully Authenticated!"];

@@ -10,6 +10,9 @@ Our mockup of the feature in eHarmony is below:
 ![mockup](https://d262ilb51hltx0.cloudfront.net/max/2000/1*ngtPaxXdEjGrNpb759-T3A.png)
 
 ##Example Usage
+
+    pod 'EHFAuthenticator-Touch-ID'
+
     [[EHFAuthenticator sharedInstance] setReason:@"Authenticate with Touch ID to access secure data"]
     [[EHFAuthenticator sharedInstance] authenticateWithSuccess:^(){
         [self presentAlertControllerWithMessage:@"Successfully Authenticated!"];

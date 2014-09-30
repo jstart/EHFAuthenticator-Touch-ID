@@ -1,7 +1,7 @@
 EHFAuthenticator
 ================
 
-Simple class for handling Local Authentication using Touch ID. Used in eHarmony iOS App.
+Simple class for handling Local Authentication using Touch ID. Used in eHarmony iOS App. EHF stands for eHarmony Foundation which is our library of utilities built off Apple Frameworks.
 
 Article describing the feature [on medium]
 (https://medium.com/ios-os-x-development/getting-started-with-touch-id-local-authentication-5264b4c256b9).

@@ -1,35 +1,17 @@
-#
-#  Be sure to run `pod spec lint EHFAuthenticator-Touch-ID.podspec' to ensure this is a
-#  valid spec and to remove all comments including this before submitting the spec.
-#
-#  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
-#  To see working Podspecs in the CocoaPods repo see https://github.com/CocoaPods/Specs/
-#
-
 Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  These will help people to find your library, and whilst it
-  #  can feel like a chore to fill in it's definitely to your advantage. The
-  #  summary should be tweet-length, and the description more in depth.
-  #
 
-  s.name         = "EHFAuthenticator Touch ID"
+  s.name         = "EHFAuthenticator-Touch-ID"
   s.version      = "0.0.1"
   s.summary      = "Simple class for handling Local Authentication using Touch ID. Used in eHarmony iOS App."
 
   s.description  = <<-DESC
-                   A longer description of EHFAuthenticator-Touch-ID in Markdown format.
-
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
+                   EHFAuthenticator is a simple class to handle Touch ID security using the LocalAuthentication framework.  It manages a LAContext object and handles configuring the Touch ID alert with a proper reason and fallback button. 
                    DESC
 
   s.homepage     = "https://github.com/jstart/EHFAuthenticator-Touch-ID"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+  s.screenshots  = "https://camo.githubusercontent.com/86f21615b1f9634734f2d07e03acc2c3adc4143a/68747470733a2f2f64323632696c623531686c7478302e636c6f756466726f6e742e6e65742f6d61782f323030302f312a6e67745061785864456a47724e70623735392d5433412e706e67"
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -39,9 +21,7 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT (example)"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
-
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -81,12 +61,13 @@ Pod::Spec.new do |s|
   #  files it will include any header in the folder.
   #  Not including the public_header_files will make all headers public.
   #
+  s.default_subspec = "ObjC"
   s.subspec 'ObjC' do |objc|
-    objc.source_files = "Authenticator-ObjC/*.{h.m}"
+    objc.source_files = "Authenticator-ObjC", "Authenticator-ObjC/*.{h.m}"
   end
-  s.subspec 'Swift' do |swift|
-    swift.source_files = "Authenticator-Swift/*.swift"
-  end
+  #s.subspec 'Swift' do |swift|
+  #  swift.source_files = "Authenticator-Swift", "Authenticator-Swift/*.swift"
+  #end
 
   # s.public_header_files = "Classes/**/*.h"
 

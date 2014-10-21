@@ -19,6 +19,11 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSError * error = nil;
+
+    [[EHFAuthenticator sharedInstance] setReason:@"Because i can"];
+    [[EHFAuthenticator sharedInstance] setFallbackButtonTitle:@"Enter Password"];
+    [[EHFAuthenticator sharedInstance] setUseDefaultFallbackTitle:YES];
+    
     if (![EHFAuthenticator canAuthenticateWithError:&error]) {
         [self.authenticationButton setEnabled:NO];
         NSString * authErrorString = @"Check your Touch ID Settings.";

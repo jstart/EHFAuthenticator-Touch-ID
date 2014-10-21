@@ -65,7 +65,7 @@ static EHFAuthenticator *sharedInstance;
                                    if (authenticated) {
                                        DispatchMainThread(^(){success();});
                                    } else {
-                                       DispatchMainThread(^(){failure((LAError) authError.code);});
+                                       DispatchMainThread(^(){failure((LAError) error.code);});
                                    }
                                }];
     } else {

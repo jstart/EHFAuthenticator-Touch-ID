@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name         = "EHFAuthenticator-Touch-ID"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Simple class for handling Local Authentication using Touch ID. Used in eHarmony iOS App."
 
   s.description  = <<-DESC
@@ -42,7 +42,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios, "8.0"
+  s.platform     = :ios, "7.0"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

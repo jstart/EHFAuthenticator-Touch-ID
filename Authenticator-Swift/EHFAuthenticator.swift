@@ -72,7 +72,7 @@ class EHFAuthenticator : NSObject {
                 if (authenticated) {
                     dispatch_async(dispatch_get_main_queue(), {success()})
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), {failure(authError!.code)})
+                    dispatch_async(dispatch_get_main_queue(), {failure(error!.code)})
                 }
             })
         } else {

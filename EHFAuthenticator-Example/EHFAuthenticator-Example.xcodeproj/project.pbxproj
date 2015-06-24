@@ -190,6 +190,7 @@
 		AD53A0D819D9E64400F65916 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = truman;
 				TargetAttributes = {
@@ -454,6 +455,7 @@
 				ADD0E9F619DA009800A3B602 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

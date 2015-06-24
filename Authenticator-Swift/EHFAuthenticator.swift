@@ -62,13 +62,13 @@ class EHFAuthenticator : NSObject {
         self.context = LAContext()
         var authError : NSError?
         if (self.useDefaultFallbackTitle) {
-            self.context.localizedFallbackTitle = self.fallbackButtonTitle;
+            self.context.localizedFallbackTitle = self.fallbackButtonTitle as String;
         }else if (self.hideFallbackButton){
             self.context.localizedFallbackTitle = "";
         }
         if (self.context.canEvaluatePolicy(policy, error: &authError)) {
             self.context.evaluatePolicy(policy, localizedReason:
-                reason, reply:{ authenticated, error in
+                reason as String, reply:{ authenticated, error in
                 if (authenticated) {
                     dispatch_async(dispatch_get_main_queue(), {success()})
                 } else {

@@ -20,13 +20,13 @@ class ViewController: UIViewController {
             var authErrorString = "Check your Touch ID Settings."
             if let code = error?.code {
                 switch (code) {
-                case LAError.TouchIDNotEnrolled.toRaw():
+                case LAError.TouchIDNotEnrolled.rawValue:
                     authErrorString = "No Touch ID fingers enrolled.";
                     break;
-                case LAError.TouchIDNotAvailable.toRaw():
+                case LAError.TouchIDNotAvailable.rawValue:
                     authErrorString = "Touch ID not available on your device.";
                     break;
-                case LAError.PasscodeNotSet.toRaw():
+                case LAError.PasscodeNotSet.rawValue:
                     authErrorString = "Need a passcode set to use Touch ID.";
                     break;
                 default:
@@ -43,26 +43,26 @@ class ViewController: UIViewController {
             }, failure:{ errorCode in
                 var authErrorString : NSString
                 switch (errorCode) {
-                case LAError.SystemCancel.toRaw():
+                case LAError.SystemCancel.rawValue:
                 authErrorString = "System canceled auth request due to app coming to foreground or background.";
                 break;
-                case LAError.AuthenticationFailed.toRaw():
+                case LAError.AuthenticationFailed.rawValue:
                 authErrorString = "User failed after a few attempts.";
                 break;
-                case LAError.UserCancel.toRaw():
+                case LAError.UserCancel.rawValue:
                 authErrorString = "User cancelled.";
                 break;
                 
-                case LAError.UserFallback.toRaw():
+                case LAError.UserFallback.rawValue:
                 authErrorString = "Fallback auth method should be implemented here.";
                 break;
-                case LAError.TouchIDNotEnrolled.toRaw():
+                case LAError.TouchIDNotEnrolled.rawValue:
                 authErrorString = "No Touch ID fingers enrolled.";
                 break;
-                case LAError.TouchIDNotAvailable.toRaw():
+                case LAError.TouchIDNotAvailable.rawValue:
                 authErrorString = "Touch ID not available on your device.";
                 break;
-                case LAError.PasscodeNotSet.toRaw():
+                case LAError.PasscodeNotSet.rawValue:
                 authErrorString = "Need a passcode set to use Touch ID.";
                 break;
                 default:
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
     }
     
     func presentAlertControllerWithMessage(message : NSString) {
-        var alertController = UIAlertController(title:"Touch ID", message:message, preferredStyle:.Alert)
+        var alertController = UIAlertController(title:"Touch ID", message:message as String, preferredStyle:.Alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
     }

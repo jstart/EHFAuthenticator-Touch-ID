@@ -15,7 +15,7 @@ Our mockup of the feature in eHarmony is below:
 
 Install with Cocoapods:
 
-    pod 'EHFAuthenticator-Touch-ID'
+    pod 'EHFAuthenticator-Touch-ID', '0.0.3'
 
 Set a reason to show to your users, then authenticate to verify identity.
 ### ObjC

@@ -29,6 +29,7 @@ Pod::Spec.new do |s|
   end
   s.subspec 'Swift' do |swift|
     swift.source_files = "Authenticator-Swift", "Authenticator-Swift/*.swift"
+    swift.platform     = :ios, "8.0"
   end
 
   s.framework  = "LocalAuthentication"

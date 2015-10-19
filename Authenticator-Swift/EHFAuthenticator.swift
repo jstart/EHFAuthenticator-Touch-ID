@@ -48,25 +48,25 @@ class EHFAuthenticator : NSObject {
         self.reason = ""
     }
     
-    class func canAuthenticateWithError(error: NSErrorPointer) -> Bool{
+    class func canAuthenticateWithError() throws{
+        let error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
         if ((NSClassFromString("LAContext")) != nil){
-            if (EHFAuthenticator.sharedInstance.context .canEvaluatePolicy(EHFAuthenticator.sharedInstance.policy, error: NSErrorPointer())){
-                return true
+            if (EHFAuthenticator.sharedInstance.context.canEvaluatePolicy(EHFAuthenticator.sharedInstance.policy, error: nil)){
+                return
             }
-            return false
+            throw error
         }
-        return false
+        throw error
     }
     
     func authenticateWithSuccess(success: EHFCompletionBlock, failure: EHFAuthenticationErrorBlock){
         self.context = LAContext()
-        var authError : NSError?
         if (self.useDefaultFallbackTitle) {
             self.context.localizedFallbackTitle = self.fallbackButtonTitle as String;
         }else if (self.hideFallbackButton){
             self.context.localizedFallbackTitle = "";
         }
-        if (self.context.canEvaluatePolicy(policy, error: &authError)) {
+        if (self.context.canEvaluatePolicy(policy, error: nil)) {
             self.context.evaluatePolicy(policy, localizedReason:
                 reason as String, reply:{ authenticated, error in
                 if (authenticated) {
@@ -76,7 +76,7 @@ class EHFAuthenticator : NSObject {
                 }
             })
         } else {
-            failure(authError!.code)
+            failure(0)
         }
     }
 }

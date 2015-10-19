@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   s.name         = "EHFAuthenticator-Touch-ID"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "Simple class for handling Local Authentication using Touch ID. Used in eHarmony iOS App."
 
   s.description  = <<-DESC

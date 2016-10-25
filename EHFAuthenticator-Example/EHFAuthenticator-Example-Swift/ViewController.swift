@@ -13,57 +13,57 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var authenticationButton: UIButton!
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         do {
             try EHFAuthenticator.canAuthenticateWithError()
         }
          catch {
-            self.authenticationButton.enabled = false
+            self.authenticationButton.isEnabled = false
             var authErrorString = "Check your Touch ID Settings."
             let nserror = error as NSError
             switch (nserror.code) {
-            case LAError.TouchIDNotEnrolled.rawValue:
+            case LAError.Code.touchIDNotEnrolled.rawValue:
                 authErrorString = "No Touch ID fingers enrolled.";
                 break;
-            case LAError.TouchIDNotAvailable.rawValue:
+            case LAError.Code.touchIDNotAvailable.rawValue:
                 authErrorString = "Touch ID not available on your device.";
                 break;
-            case LAError.PasscodeNotSet.rawValue:
+            case LAError.Code.passcodeNotSet.rawValue:
                 authErrorString = "Need a passcode set to use Touch ID.";
                 break;
             default:
                 authErrorString = "Check your Touch ID Settings.";
             }
-            self.authenticationButton.setTitle(authErrorString, forState: .Disabled)
+            self.authenticationButton.setTitle(authErrorString, for: .disabled)
         }
     }
     
-    @IBAction func authenticate(sender: UIButton) {
+    @IBAction func authenticate(_ sender: UIButton) {
         EHFAuthenticator.sharedInstance.authenticateWithSuccess({
             self.presentAlertControllerWithMessage("Successfully Authenticated!")
             }, failure:{ errorCode in
                 var authErrorString : NSString
                 switch (errorCode) {
-                case LAError.SystemCancel.rawValue:
+                case LAError.systemCancel.rawValue:
                 authErrorString = "System canceled auth request due to app coming to foreground or background.";
                 break;
-                case LAError.AuthenticationFailed.rawValue:
+                case LAError.authenticationFailed.rawValue:
                 authErrorString = "User failed after a few attempts.";
                 break;
-                case LAError.UserCancel.rawValue:
+                case LAError.userCancel.rawValue:
                 authErrorString = "User cancelled.";
                 break;
                 
-                case LAError.UserFallback.rawValue:
+                case LAError.userFallback.rawValue:
                 authErrorString = "Fallback auth method should be implemented here.";
                 break;
-                case LAError.TouchIDNotEnrolled.rawValue:
+                case LAError.touchIDNotEnrolled.rawValue:
                 authErrorString = "No Touch ID fingers enrolled.";
                 break;
-                case LAError.TouchIDNotAvailable.rawValue:
+                case LAError.touchIDNotAvailable.rawValue:
                 authErrorString = "Touch ID not available on your device.";
                 break;
-                case LAError.PasscodeNotSet.rawValue:
+                case LAError.passcodeNotSet.rawValue:
                 authErrorString = "Need a passcode set to use Touch ID.";
                 break;
                 default:
@@ -72,12 +72,13 @@ class ViewController: UIViewController {
                 }
                 self.presentAlertControllerWithMessage(authErrorString)
             })
+//        print(LAError.touchIDNotEnrolled.rawValue
     }
     
-    func presentAlertControllerWithMessage(message : NSString) {
-        let alertController = UIAlertController(title:"Touch ID", message:message as String, preferredStyle:.Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
+    func presentAlertControllerWithMessage(_ message : NSString) {
+        let alertController = UIAlertController(title:"Touch ID", message:message as String, preferredStyle:.alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

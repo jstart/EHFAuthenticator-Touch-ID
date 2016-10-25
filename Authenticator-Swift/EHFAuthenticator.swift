@@ -9,12 +9,12 @@
 import Foundation
 import LocalAuthentication
 
-typealias EHFCompletionBlock = Void ->()
-typealias EHFAuthenticationErrorBlock = Int -> ()
+typealias EHFCompletionBlock = (Void) ->()
+typealias EHFAuthenticationErrorBlock = (Int) -> ()
 
 class EHFAuthenticator : NSObject {
     
-    private var context : LAContext
+    fileprivate var context : LAContext
     
     // reason string presented to the user in auth dialog
     var reason : NSString
@@ -44,7 +44,7 @@ class EHFAuthenticator : NSObject {
         self.fallbackButtonTitle = ""
         self.useDefaultFallbackTitle = false
         self.hideFallbackButton = false
-        self.policy = .DeviceOwnerAuthenticationWithBiometrics
+        self.policy = .deviceOwnerAuthenticationWithBiometrics
         self.reason = ""
     }
     
@@ -59,7 +59,7 @@ class EHFAuthenticator : NSObject {
         throw error
     }
     
-    func authenticateWithSuccess(success: EHFCompletionBlock, failure: EHFAuthenticationErrorBlock){
+    func authenticateWithSuccess(_ success: @escaping EHFCompletionBlock, failure: @escaping EHFAuthenticationErrorBlock){
         self.context = LAContext()
         if (self.useDefaultFallbackTitle) {
             self.context.localizedFallbackTitle = self.fallbackButtonTitle as String;
@@ -70,9 +70,9 @@ class EHFAuthenticator : NSObject {
             self.context.evaluatePolicy(policy, localizedReason:
                 reason as String, reply:{ authenticated, error in
                 if (authenticated) {
-                    dispatch_async(dispatch_get_main_queue(), {success()})
+                    DispatchQueue.main.async(execute: {success()})
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), {failure(error!.code)})
+                    DispatchQueue.main.async(execute: {failure(error!._code)})
                 }
             })
         } else {

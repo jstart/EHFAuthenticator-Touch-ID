@@ -1,6 +1,5 @@
 //
 //  EHFAuthenticator.swift
-//  EHFAuthenticator-Example
 //
 //  Created by Christopher Truman on 9/29/14.
 //  Copyright (c) 2014 truman. All rights reserved.
@@ -11,6 +10,7 @@ import LocalAuthentication
 
 typealias EHFCompletionBlock = (Void) ->()
 typealias EHFAuthenticationErrorBlock = (Int) -> ()
+
 
 class EHFAuthenticator : NSObject {
     
@@ -48,25 +48,33 @@ class EHFAuthenticator : NSObject {
         self.reason = ""
     }
     
-    class func canAuthenticateWithError() throws{
-        let error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
-        if ((NSClassFromString("LAContext")) != nil){
-            if (EHFAuthenticator.sharedInstance.context.canEvaluatePolicy(EHFAuthenticator.sharedInstance.policy, error: nil)){
-                return
+    class func canAuthenticateWithError(error: NSErrorPointer) -> Bool{
+        if (NSUserDefaults.standardUserDefaults().objectForKey("touch_id_security") != nil){
+            if NSUserDefaults.standardUserDefaults().boolForKey("touch_id_security") == false{
+                return false
             }
-            throw error
         }
-        throw error
+        else {
+            return false
+        }
+        if ((NSClassFromString("LAContext")) != nil){
+            if (EHFAuthenticator.sharedInstance.context .canEvaluatePolicy(EHFAuthenticator.sharedInstance.policy, error: nil)){
+                return true
+            }
+            return false
+        }
+        return false
     }
     
     func authenticateWithSuccess(_ success: @escaping EHFCompletionBlock, failure: @escaping EHFAuthenticationErrorBlock){
         self.context = LAContext()
+        var authError : NSError?
         if (self.useDefaultFallbackTitle) {
             self.context.localizedFallbackTitle = self.fallbackButtonTitle as String;
         }else if (self.hideFallbackButton){
             self.context.localizedFallbackTitle = "";
         }
-        if (self.context.canEvaluatePolicy(policy, error: nil)) {
+        if (self.context.canEvaluatePolicy(policy, error: &authError)) {
             self.context.evaluatePolicy(policy, localizedReason:
                 reason as String, reply:{ authenticated, error in
                 if (authenticated) {
@@ -76,7 +84,7 @@ class EHFAuthenticator : NSObject {
                 }
             })
         } else {
-            failure(0)
+            failure(authError!.code)
         }
     }
 }

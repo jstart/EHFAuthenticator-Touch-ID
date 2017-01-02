@@ -15,7 +15,7 @@ Our mockup of the feature in eHarmony is below:
 
 ##Example Usage
 
-Install with Cocoapods:
+Install with CocoaPods:
 
     pod 'EHFAuthenticator-Touch-ID', '0.0.4'
 

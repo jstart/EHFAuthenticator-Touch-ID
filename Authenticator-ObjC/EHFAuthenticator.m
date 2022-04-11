@@ -58,8 +58,9 @@ static EHFAuthenticator *sharedInstance;
     }else if (self.hideFallbackButton){
         self.context.localizedFallbackTitle = @"";
     }
-    if ([self.context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&authError]) {
-        [self.context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+    
+    if ([self.context canEvaluatePolicy: self.policy error:&authError]) {
+        [self.context evaluatePolicy: self.policy
                      localizedReason:self.reason
                                reply:^(BOOL authenticated, NSError *error) {
                                    if (authenticated) {
